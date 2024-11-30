@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/small_business_dashboard/static/css/main.16abd229.css",
+    "main.js": "/small_business_dashboard/static/js/main.eb640371.js",
+    "index.html": "/small_business_dashboard/index.html",
+    "main.16abd229.css.map": "/small_business_dashboard/static/css/main.16abd229.css.map",
+    "main.eb640371.js.map": "/small_business_dashboard/static/js/main.eb640371.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.16abd229.css",
+    "static/js/main.eb640371.js"
+  ]
+}
