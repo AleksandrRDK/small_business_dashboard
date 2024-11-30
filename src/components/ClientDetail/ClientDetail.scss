@@ -1,0 +1,212 @@
+.client-detail {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 24px;
+    font-family: "Roboto", sans-serif;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #f4f4f4;
+      padding-bottom: 16px;
+
+      h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 140px;
+    }
+
+    &__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      &--back {
+        background: #6c757d;
+        color: #fff;
+
+        &:hover {
+          background: #5a6268;
+        }
+      }
+
+      &--edit {
+        background: #007bff;
+        color: #fff;
+
+        &:hover {
+          background: #0056b3;
+        }
+      }
+
+      &--delete {
+        background: #dc3545;
+        color: #fff;
+
+        &:hover {
+          background: #a71d2a;
+        }
+      }
+
+      &--save {
+        background: #28a745;
+        color: #fff;
+
+        &:hover {
+          background: #218838;
+        }
+      }
+
+      &--cancel {
+        background: #ffc107;
+        color: #333;
+
+        &:hover {
+          background: #e0a800;
+        }
+      }
+    }
+
+    &__content {
+      margin-top: 20px;
+    }
+
+    &__info {
+      p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin: 10px 0;
+
+        strong {
+          color: #555;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      &-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &-textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      &-checkbox {
+        width: 20px;
+        height: 20px;
+      }
+
+      &-label {
+        font-size: 1rem;
+        color: #555;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      &-input,
+      &-textarea {
+        padding: 12px 14px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        background: #f9f9f9;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+          background: #fff;
+        }
+      }
+
+      &-input {
+        color: #333;
+        font-weight: 500;
+      }
+    }
+
+    // заказы
+
+    &__orders {
+      margin-top: 40px;
+
+      h3 {
+        font-size: 1.6rem;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #f4f4f4;
+        padding-bottom: 10px;
+      }
+
+      &-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      &-item {
+        cursor: pointer;
+        background: #e7f3ff; /* Нежно-голубой фон */
+        border: 1px solid #b3d9ff; /* Голубая рамка */
+        border-radius: 12px;
+        padding: 12px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        p {
+          margin: 8px 0;
+          font-size: 1rem;
+          line-height: 1.4;
+
+          strong {
+            color: #0056b3; /* Темно-голубой для акцента */
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }

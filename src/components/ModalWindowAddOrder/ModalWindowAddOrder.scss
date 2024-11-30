@@ -1,0 +1,49 @@
+/* Стили для всего контейнера с label */
+.modal__form-group {
+    margin-bottom: 1rem;
+
+    label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+    }
+
+    select {
+        margin-top: 10px;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 0.4rem;
+        background-color: #f9f9f9;
+        color: #333;
+        font-size: 1rem;
+        line-height: 1.5;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            border-color: #0077b6; /* Легкий акцент при наведении */
+        }
+
+        &:focus {
+            border-color: #0077b6;
+            box-shadow: 0 0 4px rgba(0, 119, 182, 0.5); /* Подсветка при фокусе */
+        }
+
+        &::placeholder {
+            color: #999;
+        }
+    }
+}
+
+.modal__error {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+input.error,
+select.error {
+    border-color: #d9534f;
+}
+

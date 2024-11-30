@@ -1,0 +1,137 @@
+.clients {
+    padding: 20px;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    &__search {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    &__add-btn {
+        margin-left: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #1e90ff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 80%;
+    }
+
+    &__item{
+        display: grid;
+        grid-template-columns: 4fr 0.1fr;
+        column-gap: 10px;
+        &:hover .clients__edit-btn {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__span__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f0f8ff;
+        border: 2px solid #1e90ff;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+            background-color: #4682b4;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+    }
+
+    &__name,
+    &__phone,
+    &__email {
+        flex: 1;
+        font-size: 16px;
+        text-align: left;
+        padding: 0 10px;
+    }
+
+    &__name {
+        font-weight: bold;
+    }
+
+    &__no-data {
+        text-align: center;
+        color: #aaa;
+        padding: 20px;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        width: 80px;
+    }
+
+    &__favorite-btn,
+    &__edit-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+        padding: 0;
+    }
+
+    &__favorite-btn{
+        transition: transform 0.2s ease;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    &__favorite-btn.active{
+        color: gold;
+    }
+
+    &__edit-btn{
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+
+        &:hover {
+            transform: translateY(-15px) scale(1.5);
+            transition: transform 0.2s ease;
+        }
+        // Всегда показываем на мобильных устройствах
+        @media (max-width: 768px) {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
