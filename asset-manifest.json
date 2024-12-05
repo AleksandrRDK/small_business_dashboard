@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/small_business_dashboard/static/css/main.fa5b644f.css",
-    "main.js": "/small_business_dashboard/static/js/main.41937e64.js",
+    "main.css": "/small_business_dashboard/static/css/main.8ca26614.css",
+    "main.js": "/small_business_dashboard/static/js/main.faf064dd.js",
     "index.html": "/small_business_dashboard/index.html",
-    "main.fa5b644f.css.map": "/small_business_dashboard/static/css/main.fa5b644f.css.map",
-    "main.41937e64.js.map": "/small_business_dashboard/static/js/main.41937e64.js.map"
+    "main.8ca26614.css.map": "/small_business_dashboard/static/css/main.8ca26614.css.map",
+    "main.faf064dd.js.map": "/small_business_dashboard/static/js/main.faf064dd.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa5b644f.css",
-    "static/js/main.41937e64.js"
+    "static/css/main.8ca26614.css",
+    "static/js/main.faf064dd.js"
   ]
 }
