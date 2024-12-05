@@ -8,20 +8,18 @@ import ModalWindowAddOrder from "../ModalWindowAddOrder/ModalWindowAddOrder";
 import "./Orders.scss";
 
 const Orders = () => {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const { orders } = useSelector((state: RootState) => state.orders);
     const { clients } = useSelector((state: RootState) => state.clients);
 
-    // Функция для получения имени клиента по clientId
-    const getClientNameById = (clientId: string) => {
+    const getClientNameById = (clientId: string): string => {
         const client = clients.find(client => client.id === clientId);
         return client ? client.name : "Неизвестный клиент";
     };
 
-    // Фильтрация заказов по поисковому запросу
     const filteredOrders = orders.filter(order => {
         const clientName = getClientNameById(order.clientId).toLowerCase();
         return (
@@ -30,14 +28,12 @@ const Orders = () => {
         );
     });
 
-    // Статистика заказов
     const totalOrders = orders.length;
     const completedOrders = orders.filter(order => order.status === "Завершен").length;
     const inProgressOrders = orders.filter(order => order.status === "В процессе").length;
     const cancelledOrders = orders.filter(order => order.status === "Отменен").length;
 
-    // Возврат иконок статусов
-    const getStatusIcon = (status: string) => {
+    const getStatusIcon = (status: string): JSX.Element | null => {
         switch (status) {
             case "Завершен":
                 return (
@@ -62,7 +58,7 @@ const Orders = () => {
         }
     };
 
-    const handleOrderClick = (id: string) => {
+    const handleOrderClick = (id: string): void => {
         navigate(`/order/${id}`);
     };
 
@@ -112,7 +108,7 @@ const Orders = () => {
                             <div className="orders__info">
                                 <p className="orders__total">{order.total} ₽</p>
                                 <p className="orders__date">
-                                {order.date.split("-").reverse().join(".")}
+                                    {order.date.split("-").reverse().join(".")}
                                 </p>
                                 <p className="orders__client">{getClientNameById(order.clientId)}</p>
                             </div>

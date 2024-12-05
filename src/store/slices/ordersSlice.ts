@@ -11,7 +11,7 @@ export interface Order {
   notes: string;
 }
 
-interface OrdersState {
+export interface OrdersState {
   orders: Order[];
 }
 
@@ -22,8 +22,8 @@ const initialState: OrdersState = {
       clientId: "1",
       orderNumber: "ORD12345",
       status: "В процессе",
-      date: "2024-11-01",
-      total: "5000",
+      date: "2024-10-01",
+      total: "50000",
       notes: "описание к заказу",
     },
     {
@@ -31,8 +31,8 @@ const initialState: OrdersState = {
       clientId: "2",
       orderNumber: "ORD12346",
       status: "Завершен",
-      date: "2024-11-02",
-      total: "7500",
+      date: "2024-10-02",
+      total: "75000",
       notes: "описание к заказу",
     },
     {

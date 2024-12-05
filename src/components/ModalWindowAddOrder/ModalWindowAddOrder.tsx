@@ -25,7 +25,6 @@ const ModalWindowAddOrder = ({onClose}: ModalProps) => {
         total: "",
     });
 
-    // Закрытие по нажатию на Esc
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
@@ -39,7 +38,6 @@ const ModalWindowAddOrder = ({onClose}: ModalProps) => {
         };
     }, [onClose]);
 
-    // Закрытие по клику вне модального окна
     const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
             onClose();
@@ -63,8 +61,8 @@ const ModalWindowAddOrder = ({onClose}: ModalProps) => {
             newErrors.clientId = "Пожалуйста, выберите клиента.";
         }
 
-        if (!formData.total.trim() || Number(formData.total) <= 0) {
-            newErrors.total = "Пожалуйста, введите корректную сумму (больше 0).";
+        if (!formData.total.trim() || Number(formData.total) <= 50) {
+            newErrors.total = "Пожалуйста, введите корректную сумму (больше 50).";
         }
 
         setErrors(newErrors);

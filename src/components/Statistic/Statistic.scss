@@ -18,7 +18,7 @@
         margin-bottom: 30px;
 
         &__card {
-            flex: 1 1 45%; /* Резиновый размер для двух колонок */
+            flex: 1 1 45%;
             background-color: #1E90FF;
             color: white;
             padding: 20px;
@@ -44,7 +44,7 @@
 
         &__chart,
         &__diagram {
-            flex: 1 1 45%; /* Резиновый размер для двух колонок */
+            flex: 1 1 45%;
             background-color: #f5f5f5;
             padding: 20px;
             border-radius: 10px;

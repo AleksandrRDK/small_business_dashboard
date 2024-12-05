@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState, AppDispatch } from "../../store/store";
 import { toggleFavorite } from "../../store/slices/clientsSlice";
 import ModalWindowAddClient from "../ModalWindowAddClient/ModalWindowAddClient";
-
 import { FaStar } from "react-icons/fa";
 import "./Clients.scss";
 
-const Clients = () => {
+const Clients: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  // Получаем данные клиентов из Redux
   const clients = useSelector((state: RootState) => state.clients.clients);
 
-  // Фильтрация клиентов
   const filteredClients = clients.filter((client) => {
     const normalizedPhone = client.phone.replace(/[\s()-]/g, "");
     const normalizedQuery = searchQuery.replace(/\s+/g, "").toLowerCase();
@@ -34,7 +31,7 @@ const Clients = () => {
   };
 
   const handleToggleFavorite = (id: string) => {
-    dispatch(toggleFavorite(id)); // Триггерим action для изменения состояния избранного
+    dispatch(toggleFavorite(id));
   };
 
   return (
@@ -47,7 +44,10 @@ const Clients = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="clients__search"
         />
-        <button className="clients__add-btn" onClick={() => setIsModalOpen(true)}>
+        <button
+          className="clients__add-btn"
+          onClick={() => setIsModalOpen(true)}
+        >
           Добавить клиента
         </button>
       </header>
@@ -67,7 +67,9 @@ const Clients = () => {
               </div>
               <div className="clients__actions">
                 <button
-                  className={`clients__favorite-btn ${client.favorites ? "active" : ""}`}
+                  className={`clients__favorite-btn ${
+                    client.favorites ? "active" : ""
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleToggleFavorite(client.id);
@@ -89,6 +91,7 @@ const Clients = () => {
           <li className="clients__no-data">Ничего не найдено</li>
         )}
       </ul>
+
       {isModalOpen && (
         <ModalWindowAddClient onClose={() => setIsModalOpen(false)} />
       )}

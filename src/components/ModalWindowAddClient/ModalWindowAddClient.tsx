@@ -9,22 +9,33 @@ type ModalProps = {
   onClose: () => void;
 };
 
+type FormData = {
+  name: string;
+  phone: string;
+  email: string;
+};
+
+type FormErrors = {
+  name: string;
+  phone: string;
+  email: string;
+};
+
 const ModalWindowAddClient = ({ onClose }: ModalProps) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
     email: "",
   });
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<FormErrors>({
     name: "",
     phone: "",
     email: "",
   });
 
-  // Закрытие по нажатию на Esc
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -38,43 +49,44 @@ const ModalWindowAddClient = ({ onClose }: ModalProps) => {
     };
   }, [onClose]);
 
-  // Закрытие по клику вне модального окна
   const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
 
-  // Обработчик изменения input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // Добавление нового клиента
   const validateForm = () => {
-    const newErrors = {
+    const newErrors: FormErrors = {
       name: "",
       phone: "",
       email: "",
     };
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Пожалуйста, введите ФИО.";
+    if (formData.name.trim().length < 2) {
+      newErrors.name = "ФИО должно содержать минимум 2 символа.";
     }
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Пожалуйста, введите телефон.";
+
+    if (!/^\+?[1-9]\d{1,14}$/.test(formData.phone.replace(/\D/g, ""))) {
+      newErrors.phone = "Телефон должен быть в правильном формате.";
     }
-    if (!formData.email.trim()) {
-      newErrors.email = "Пожалуйста, введите почту.";
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Почта должна быть корректной.";
     }
 
     setErrors(newErrors);
     return !newErrors.name && !newErrors.phone && !newErrors.email;
   };
 
-  const handleAddClient = () => {
+  const handleAddClient = (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!validateForm()) {
       return;
     }
@@ -100,7 +112,7 @@ const ModalWindowAddClient = ({ onClose }: ModalProps) => {
         <button className="modal__close" onClick={onClose}>
           ✖
         </button>
-        <form className="modal__form" onSubmit={(e) => e.preventDefault()}>
+        <form className="modal__form" onSubmit={handleAddClient}>
           <label>
             <strong>ФИО</strong>
             <input
@@ -137,11 +149,7 @@ const ModalWindowAddClient = ({ onClose }: ModalProps) => {
             />
             {errors.email && <p className="modal__error">{errors.email}</p>}
           </label>
-          <button
-            type="button"
-            className="modal__add-btn"
-            onClick={handleAddClient}
-          >
+          <button type="submit" className="modal__add-btn">
             Добавить клиента
           </button>
         </form>

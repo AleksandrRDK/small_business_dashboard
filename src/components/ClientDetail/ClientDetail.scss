@@ -7,6 +7,13 @@
     padding: 24px;
     font-family: "Roboto", sans-serif;
 
+    .error {
+      color: #e74c3c;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+
     &__header {
       display: flex;
       justify-content: space-between;
@@ -184,8 +191,8 @@
 
       &-item {
         cursor: pointer;
-        background: #e7f3ff; /* Нежно-голубой фон */
-        border: 1px solid #b3d9ff; /* Голубая рамка */
+        background: #e7f3ff;
+        border: 1px solid #b3d9ff;
         border-radius: 12px;
         padding: 12px;
         text-align: center;
@@ -203,7 +210,7 @@
           line-height: 1.4;
 
           strong {
-            color: #0056b3; /* Темно-голубой для акцента */
+            color: #0056b3;
             font-weight: bold;
           }
         }

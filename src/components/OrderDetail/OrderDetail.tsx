@@ -17,14 +17,12 @@ const OrderDetail = () => {
 
     const order = orders.find((o) => o.id === id);
 
-    // Селектор для получения имени клиента по его ID
-    const selectClientNameById = (clientId: string) => {
-        const client = clients.find((client) => client.id === clientId);
-        return client ? client.name : "Неизвестный клиент";
-    };
+    const [errors, setErrors] = useState({
+        clientId: "",
+        total: "",
+    });
 
     const [isEditing, setIsEditing] = useState(false);
-
     const [formData, setFormData] = useState<Omit<Order, "id" | "date" | "orderNumber">>({
         clientId: order?.clientId || "",
         status: order?.status || "",
@@ -35,6 +33,11 @@ const OrderDetail = () => {
     if (!order) {
         return <p className="order-detail__error">Заказ не найден</p>;
     }
+
+    const selectClientNameById = (clientId: string) => {
+        const client = clients.find((client) => client.id === clientId);
+        return client ? client.name : "Неизвестный клиент";
+    };
 
     const handleEdit = () => setIsEditing(true);
 
@@ -47,15 +50,32 @@ const OrderDetail = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const validateForm = () => {
+        const newErrors = {
+            clientId: "",
+            total: "",
+        };
+
+        if (!formData.clientId) {
+            newErrors.clientId = "Пожалуйста, выберите клиента.";
+        }
+
+        if (!formData.total || Number(formData.total) < 50) {
+            newErrors.total = "Сумма должна быть не менее 50 ₽.";
+        }
+
+        setErrors(newErrors);
+        return !newErrors.clientId && !newErrors.total;
+    };
+
     const handleSave = () => {
-        if (!formData.clientId.trim() || !formData.total.trim()) {
-            alert("Все поля обязательны для заполнения.");
+        if (!validateForm()) {
             return;
         }
 
         const updatedOrder: Order = {
-            ...order, // Сохраняем неизменные данные
-            ...formData, // Обновляем поля из формы
+            ...order,
+            ...formData,
         };
 
         dispatch(updateOrder(updatedOrder));
@@ -80,7 +100,7 @@ const OrderDetail = () => {
     const handleBack = () => {
         const fromPath = location.state?.from || "/orders";
         navigate(fromPath);
-    }
+    };
 
     return (
         <div className="order-detail">
@@ -137,6 +157,7 @@ const OrderDetail = () => {
                                     </option>
                                 ))}
                             </select>
+                            {errors.clientId && <p className="order-detail__error">{errors.clientId}</p>}
                         </div>
                         <div className="order-detail__form-group">
                             <label className="order-detail__form-label">Статус:</label>
@@ -173,6 +194,7 @@ const OrderDetail = () => {
                                 value={formData.total}
                                 onChange={handleChange}
                             />
+                            {errors.total && <p className="order-detail__error">{errors.total}</p>}
                         </div>
                         <div className="order-detail__form-group">
                             <label htmlFor="notes" className="order-detail__form-label">

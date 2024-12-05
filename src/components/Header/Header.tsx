@@ -1,54 +1,51 @@
 import "./Header.scss";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
-const Header = () => {
+const Header: React.FC = () => {
     const location = useLocation();
-    const indicatorRef = useRef<HTMLSpanElement | null>(null);
-
-    const handleIndicator = (activeItem: HTMLElement) => {
-        const indicator = indicatorRef.current;
-
-        if (indicator) {
-            indicator.style.width = `${activeItem.offsetWidth}px`;
-            indicator.style.left = `${activeItem.offsetLeft}px`;
-        }
-    };
+    const [indicatorStyle, setIndicatorStyle] = useState<React.CSSProperties>({});
+    const validPaths = ["/dashboard", "/clients", "/orders", "/statistic"];
 
     useEffect(() => {
-        const activeItem = document.querySelector<HTMLAnchorElement>(".is-active");
+        const activeItem = document.querySelector(".nav-item.is-active") as HTMLElement | null;
         if (activeItem) {
-            handleIndicator(activeItem);
+            const { offsetWidth, offsetLeft } = activeItem;
+            setIndicatorStyle({
+                width: `${offsetWidth}px`,
+                left: `${offsetLeft}px`,
+            });
         }
     }, [location]);
 
+    const getActiveClass = (path: string): string => {
+        if (!validPaths.includes(location.pathname) && path === "/dashboard") {
+            return "is-active";
+        }
+        return location.pathname === path ? "is-active" : "";
+    };
+
     return (
-        <div className="header">
+        <header className="header">
             <div className="header__logo">
-                <span>Dashboard</span>
+                <Link to="/dashboard">Dashboard</Link>
             </div>
             <nav className="nav">
-                <Link
-                    to="/clients"
-                    className={`nav-item ${location.pathname.startsWith("/clients") ? "is-active" : ""}`}
-                >
+                <Link to="/dashboard" className={`nav-item ${getActiveClass("/dashboard")}`}>
+                    Главная
+                </Link>
+                <Link to="/clients" className={`nav-item ${getActiveClass("/clients")}`}>
                     Клиенты
                 </Link>
-                <Link
-                    to="/orders"
-                    className={`nav-item ${location.pathname === "/orders" ? "is-active" : ""}`}
-                >
+                <Link to="/orders" className={`nav-item ${getActiveClass("/orders")}`}>
                     Заказы
                 </Link>
-                <Link
-                    to="/statistic"
-                    className={`nav-item ${location.pathname.startsWith("/statistic") ? "is-active" : ""}`}
-                >
+                <Link to="/statistic" className={`nav-item ${getActiveClass("/statistic")}`}>
                     Аналитика
                 </Link>
-                <span className="nav-indicator" ref={indicatorRef}></span>
+                <span className="nav-indicator" style={indicatorStyle}></span>
             </nav>
-        </div>
+        </header>
     );
 };
 

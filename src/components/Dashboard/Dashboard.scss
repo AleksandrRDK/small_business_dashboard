@@ -1,0 +1,128 @@
+.dashboard {
+    margin: 20px;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    &__title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        span {
+            color: #007bff;
+        }
+    }
+
+    &__navigation {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2rem;
+
+        .dashboard__button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 5px #007bff;
+            }
+        }
+    }
+
+    &__section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 2rem;
+        justify-content: space-evenly;
+
+        h2 {
+            margin: 0;
+            display: inline;
+        }
+    }
+
+    &__buttons{
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__form {
+        display: flex;
+        gap: 1rem;
+
+        &-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    }
+
+    &__input {
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    &__label {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    &__success {
+        color: #28a745;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &__error {
+        color: #dc3545;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &__logout-button {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+        font-size: 1rem;
+
+        &:hover {
+            background-color: #c82333;
+        }
+    }
+}

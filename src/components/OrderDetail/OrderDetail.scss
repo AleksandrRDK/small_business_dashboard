@@ -7,6 +7,12 @@
     padding: 24px;
     font-family: "Roboto", sans-serif;
 
+    &__error {
+      color: #e74c3c;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
     &__header {
         display: flex;
         justify-content: space-between;

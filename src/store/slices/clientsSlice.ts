@@ -11,7 +11,7 @@ export interface Client {
   favorites: boolean,
 }
 
-interface ClientsState {
+export interface ClientsState {
   clients: Client[];
 }
 
@@ -25,7 +25,7 @@ const initialState: ClientsState = {
       address: "Москва, ул. Тверская, д. 1",
       registrationDate: "2024-01-01",
       notes: "Тестовый клиент 1",
-      favorites: false,
+      favorites: true,
     },
     {
       id: "2",

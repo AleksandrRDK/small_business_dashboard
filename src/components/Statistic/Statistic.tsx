@@ -3,12 +3,11 @@ import { RootState } from "../../store/store";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import "./Statistic.scss";
 
-const Statistic = () => {
+const Statistic: React.FC = () => {
     const orders = useSelector((state: RootState) => state.orders.orders);
     const clients = useSelector((state: RootState) => state.clients.clients);
 
-    // Данные для графика по количеству заказов за день/неделю/месяц
-    const orderCountData = orders.reduce((acc, order) => {
+    const orderCountData = orders.reduce<{ date: string, count: number }[]>((acc, order) => {
         const date = new Date(order.date).toLocaleDateString('ru-RU');
         const existingDate = acc.find(item => item.date === date);
         if (existingDate) {
@@ -17,23 +16,19 @@ const Statistic = () => {
             acc.push({ date, count: 1 });
         }
         return acc;
-    }, [] as { date: string, count: number }[]);
+    }, []);
 
-    // Средняя сумма заказа
     const averageOrderAmount = orders.reduce((acc, order) => acc + parseFloat(order.total), 0) / orders.length;
 
-    // Частота повторных покупок
     const repeatBuyersCount = clients.filter(client => {
         const clientOrders = orders.filter(order => String(order.clientId) === client.id);
         return clientOrders.length > 1;
     }).length;
     const totalClients = clients.length;
-    const repeatPurchaseRate = (repeatBuyersCount / totalClients) * 100;
+    const repeatPurchaseRate = totalClients > 0 ? (repeatBuyersCount / totalClients) * 100 : 0;
 
-    // Среднее количество заказов на клиента
     const averageOrdersPerClient = totalClients > 0 ? orders.length / totalClients : 0;
 
-    // Данные для диаграммы распределения клиентов
     const clientDistributionData = [
         { name: "Постоянные", value: clients.filter(client => client.favorites).length },
         { name: "Новые", value: clients.length - clients.filter(client => client.favorites).length }

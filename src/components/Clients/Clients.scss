@@ -89,7 +89,7 @@
 
     &__no-data {
         text-align: center;
-        color: #aaa;
+        color: white;
         padding: 20px;
     }
 
@@ -127,11 +127,6 @@
         &:hover {
             transform: translateY(-15px) scale(1.5);
             transition: transform 0.2s ease;
-        }
-        // Всегда показываем на мобильных устройствах
-        @media (max-width: 768px) {
-            opacity: 1;
-            visibility: visible;
         }
     }
 }
